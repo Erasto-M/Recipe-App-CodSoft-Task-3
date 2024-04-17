@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipe_app_codsoft_task3/Models/recipe_model.dart';
 import 'package:recipe_app_codsoft_task3/Providers/providers.dart';
+import 'package:recipe_app_codsoft_task3/Ui/recipe_details_screen.dart';
 
 class RecipeScreen extends ConsumerWidget {
   const RecipeScreen({super.key});
@@ -142,6 +143,9 @@ class RecipeScreen extends ConsumerWidget {
                 "Available Recipes",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
+              const SizedBox(
+                height: 10,
+              ),
               // Grid view
               Expanded(child: showAvailableRecipes()),
             ],
@@ -158,31 +162,72 @@ class RecipeScreen extends ConsumerWidget {
       return GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 6,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 2,
           ),
           itemCount: recipesList.length,
           itemBuilder: (context, index) {
             RecipeModel recipes = recipesList[index];
-            return Stack(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width / 2.5,
-                  height: MediaQuery.of(context).size.height / 4,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: AssetImage(recipes.imageUrl),
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => RecipeDetails(
+                          recipe: recipes,
+                        )));
+              },
+              child: Stack(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: MediaQuery.of(context).size.height / 4,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                              "https://media.istockphoto.com/id/1330604424/photo/macro-closeup-side-view-of-stack-of-buttermilk-pancakes-on-plate-as-traditional-breakfast.jpg?s=2048x2048&w=is&k=20&c=60_mMZxuN7zpTlKE1s_nT8badwX-ZL_M6lr0sNG1W2E="),
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.grey,
+                              blurRadius: 5,
+                              offset: Offset(0, 3))
+                        ]),
+                  ),
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.orange.shade700.withOpacity(0.9),
+                        borderRadius: BorderRadius.circular(5),
                       ),
-                      boxShadow: const [
-                        BoxShadow(
-                            color: Colors.grey,
-                            blurRadius: 5,
-                            offset: Offset(0, 3))
-                      ]),
-                ),
-              ],
+                      child: Text(
+                        recipes.title,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Container(
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade700.withOpacity(0.9),
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Text(
+                        recipes.category,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             );
           });
     });
