@@ -49,3 +49,22 @@ final searchRecipesProvider = Provider.autoDispose((ref) {
   recipes.searchRecipes(query);
   return true;
 });
+
+// TextEditing Controllersproviders
+final fullNameProvider = StateProvider<TextEditingController>((ref) {
+  return TextEditingController();
+});
+final emailProvider = StateProvider<TextEditingController>((ref) {
+  return TextEditingController();
+});
+final passwordProvider = StateProvider<TextEditingController>((ref) {
+  return TextEditingController();
+});
+final confirmPasswordProvider = StateProvider<TextEditingController>((ref) {
+  return TextEditingController();
+});
+
+// formkey provider
+final formKeyProvider = StateProvider<GlobalKey>((ref) {
+  return GlobalKey<FormState>();
+});

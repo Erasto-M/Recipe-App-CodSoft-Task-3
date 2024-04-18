@@ -89,9 +89,8 @@ class RecipeDetails extends ConsumerWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      image: const DecorationImage(
-                          image: NetworkImage(
-                              "https://www.shutterstock.com/shutterstock/photos/1918473575/display_1500/stock-photo-ugali-served-with-fish-kales-and-kachumbari-sukumawiki-garnished-tomatoes-samaki-fried-sukuma-1918473575.jpg"),
+                      image: DecorationImage(
+                          image: AssetImage(recipe.imageUrl),
                           fit: BoxFit.cover),
                       boxShadow: const [
                         BoxShadow(

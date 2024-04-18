@@ -70,6 +70,7 @@ class RecipeModel {
   }
 }
 
+// ingredients class
 class Ingredient {
   final String name;
   final String quantity;

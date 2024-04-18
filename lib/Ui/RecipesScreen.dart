@@ -42,17 +42,17 @@ class RecipeScreen extends ConsumerWidget {
                     child: const Icon(Icons.menu),
                   ),
                   // Recipe Texts
-                  const Row(
+                  Row(
                     children: [
                       Icon(
                         Icons.restaurant,
-                        color: Colors.orange,
+                        color: Colors.orange.shade700,
                         size: 20,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
-                      Text(
+                      const Text(
                         "Tasty Table",
                         style: TextStyle(
                           color: Colors.black,
@@ -115,9 +115,9 @@ class RecipeScreen extends ConsumerWidget {
                           )),
                           IconButton(
                             onPressed: () {},
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.send,
-                              color: Colors.orange,
+                              color: Colors.orange.shade700,
                             ),
                           ),
                         ],
@@ -192,14 +192,10 @@ class RecipeScreen extends ConsumerWidget {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width / 2,
-                    height: MediaQuery.of(context).size.height / 4,
+                    height: MediaQuery.of(context).size.height / 3.2,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                              "https://media.istockphoto.com/id/1330604424/photo/macro-closeup-side-view-of-stack-of-buttermilk-pancakes-on-plate-as-traditional-breakfast.jpg?s=2048x2048&w=is&k=20&c=60_mMZxuN7zpTlKE1s_nT8badwX-ZL_M6lr0sNG1W2E="),
-                        ),
                         boxShadow: const [
                           BoxShadow(
                               color: Colors.grey,
@@ -208,8 +204,31 @@ class RecipeScreen extends ConsumerWidget {
                         ]),
                   ),
                   Positioned(
-                    top: 0,
+                      top: 0,
+                      right: 0,
+                      left: 0,
+                      child: Container(
+                        height: 130,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
+                            image: DecorationImage(
+                                image: AssetImage(recipes.imageUrl),
+                                fit: BoxFit.cover),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 3))
+                            ]),
+                      )),
+                  Positioned(
+                    bottom: 0,
                     left: 0,
+                    right: 0,
                     child: Container(
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(5),
@@ -224,18 +243,18 @@ class RecipeScreen extends ConsumerWidget {
                     ),
                   ),
                   Positioned(
-                    bottom: 0,
+                    top: 0,
                     right: 0,
                     child: Container(
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade700.withOpacity(0.9),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Text(
                         recipes.category,
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.black),
                       ),
                     ),
                   ),
