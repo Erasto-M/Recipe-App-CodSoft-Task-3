@@ -39,7 +39,7 @@ class SplashScreen extends ConsumerWidget {
               curve: Curves.easeInOut,
               child: Center(
                 child: Image.asset(
-                  "assets/images/logoimage2.jpg",
+                  "assets/images/LogoImage1.png",
                   height: 270,
                   width: 270,
                 ),
