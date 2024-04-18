@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:recipe_app_codsoft_task3/Providers/providers.dart';
+import 'package:recipe_app_codsoft_task3/Services/firebase_auth_service.dart';
+import 'package:recipe_app_codsoft_task3/Ui/Authenctication/login_screen.dart';
 import 'package:recipe_app_codsoft_task3/Widgets/common_widgets.dart';
 
 class CreateAccountScreen extends ConsumerWidget {
@@ -15,6 +18,8 @@ class CreateAccountScreen extends ConsumerWidget {
     final fullNameController = ref.watch(fullNameProvider);
     final passwordController = ref.watch(passwordProvider);
     final confirmPasswordController = ref.watch(confirmPasswordProvider);
+    // loading
+    final isLoading = ref.watch(loadingSpinnerProvider);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[200],
@@ -25,9 +30,9 @@ class CreateAccountScreen extends ConsumerWidget {
             child: Column(
               children: [
                 Image.asset(
-                  "assets/images/logo.png",
+                  "assets/images/LogoImage1.png",
                   height: 150,
-                  width: 150,
+                  width: 300,
                   color: Colors.black,
                 ),
                 Center(
@@ -111,21 +116,57 @@ class CreateAccountScreen extends ConsumerWidget {
                             return null;
                           }),
                       showBigSpace(),
-                      showButtonContainer(
-                        text: "Create Account",
-                        onContainerTap: () {
-                          if (formkey.currentState!.validate()) {
-                            print("Form is validated");
-                          }
-                        },
-                        context: context,
-                      )
+                      isLoading
+                          ? SpinKitSpinningLines(
+                              color: Colors.orange.shade700,
+                              size: 70,
+                            )
+                          : showButtonContainer(
+                              text: "Create Account",
+                              onContainerTap: () async {
+                                if (formkey.currentState!.validate()) {
+                                  ref
+                                      .read(loadingSpinnerProvider.notifier)
+                                      .state = true;
+                                  await ref
+                                      .watch(firebaseAuthServiceProvider)
+                                      .createUserWithEmailAndPassword(
+                                          email: emailController.text,
+                                          password: passwordController.text,
+                                          context: context,
+                                          fullName: fullNameController.text);
+                                }
+                                ref.read(emailProvider.notifier).state.clear();
+                                ref
+                                    .read(fullNameProvider.notifier)
+                                    .state
+                                    .clear();
+                                ref
+                                    .read(passwordProvider.notifier)
+                                    .state
+                                    .clear();
+                                ref
+                                    .read(confirmPasswordProvider.notifier)
+                                    .state
+                                    .clear();
+                                ref
+                                    .read(loadingSpinnerProvider.notifier)
+                                    .state = false;
+                              },
+                              context: context,
+                            )
                     ],
                   ),
                 ),
                 showSmallSpace(),
                 showTextButton(
-                  function: () {},
+                  function: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                    );
+                  },
                   text1: "Already have an Acount ?",
                   text2: "Login",
                 ),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:recipe_app_codsoft_task3/Ui/Authenctication/login_screen.dart';
 import 'package:recipe_app_codsoft_task3/Ui/RecipesScreen.dart';
 
 class SplashScreen extends ConsumerWidget {
@@ -11,7 +12,10 @@ class SplashScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const RecipeScreen()));
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ),
+      );
     });
     return SafeArea(
       child: Scaffold(
@@ -35,7 +39,7 @@ class SplashScreen extends ConsumerWidget {
               curve: Curves.easeInOut,
               child: Center(
                 child: Image.asset(
-                  "assets/images/logo.png",
+                  "assets/images/logoimage2.jpg",
                   height: 270,
                   width: 270,
                 ),
@@ -46,7 +50,7 @@ class SplashScreen extends ConsumerWidget {
             ),
             SpinKitSpinningLines(
               color: Colors.orange.shade700,
-              size: 50,
+              size: 70,
             )
           ],
         ),

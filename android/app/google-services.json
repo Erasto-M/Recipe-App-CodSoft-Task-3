@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "343656631599",
+    "project_id": "recipe-app-codsoft",
+    "storage_bucket": "recipe-app-codsoft.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343656631599:android:dec189412fa29967fa65da",
+        "android_client_info": {
+          "package_name": "com.example.recipe_app_codsoft_task3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD0PGeNTA8HsfQRRYIRu_-KMeHAm5Nkks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

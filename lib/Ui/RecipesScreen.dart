@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipe_app_codsoft_task3/Models/recipe_model.dart';
 import 'package:recipe_app_codsoft_task3/Providers/providers.dart';
+import 'package:recipe_app_codsoft_task3/Services/firebase_auth_service.dart';
 import 'package:recipe_app_codsoft_task3/Ui/recipe_details_screen.dart';
+import 'package:recipe_app_codsoft_task3/Widgets/common_widgets.dart';
 
 class RecipeScreen extends ConsumerWidget {
   const RecipeScreen({super.key});
@@ -61,15 +65,22 @@ class RecipeScreen extends ConsumerWidget {
                       )
                     ],
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    padding: const EdgeInsets.all(10),
-                    child: const Icon(
-                      Icons.person,
-                      color: Colors.black,
+                  GestureDetector(
+                    onTap: () {
+                      ref
+                          .read(firebaseAuthServiceProvider)
+                          .signOutUser(context);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: const Icon(
+                        Icons.logout_outlined,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ],
@@ -175,8 +186,8 @@ class RecipeScreen extends ConsumerWidget {
       return GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
           ),
           itemCount: filteredRecipes.length,
           itemBuilder: (context, index) {

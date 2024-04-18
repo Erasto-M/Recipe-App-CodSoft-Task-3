@@ -38,6 +38,10 @@ dependencies:
   flutter_riverpod: ^2.5.1
   just_audio: ^0.9.37
   flutter_spinkit: ^5.2.1
+  firebase_core: ^2.30.0
+  firebase_auth: ^4.19.2
+  cloud_firestore: ^4.17.0
+  fluttertoast: ^8.2.5
 
 dev_dependencies:
   flutter_test:
