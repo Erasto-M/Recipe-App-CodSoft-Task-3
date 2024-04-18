@@ -11,6 +11,8 @@ class RecipeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final searchController = ref.watch(searchControllerProvider);
+    final searchQuery = ref.watch(searchQueryProvider);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[200],
@@ -95,6 +97,15 @@ class RecipeScreen extends ConsumerWidget {
                           const Icon(Icons.search),
                           Expanded(
                               child: TextFormField(
+                            onChanged: (value) {
+                              handleSearch(ref, value);
+                              if (value.isEmpty) {
+                                ref
+                                    .read(recipesDataProvider.notifier)
+                                    .resetRecipes();
+                              }
+                            },
+                            controller: searchController,
                             keyboardType: TextInputType.text,
                             decoration: const InputDecoration(
                                 hintText: "Search Recipe ...",
@@ -159,15 +170,17 @@ class RecipeScreen extends ConsumerWidget {
   showAvailableRecipes() {
     return Consumer(builder: (context, ref, child) {
       final recipesList = ref.watch(recipesDataProvider);
+      final filteredRecipes =
+          filterRecipes(recipesList, ref.watch(searchQueryProvider));
       return GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: 5,
             mainAxisSpacing: 2,
           ),
-          itemCount: recipesList.length,
+          itemCount: filteredRecipes.length,
           itemBuilder: (context, index) {
-            RecipeModel recipes = recipesList[index];
+            RecipeModel recipes = filteredRecipes[index];
             return GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -231,5 +244,20 @@ class RecipeScreen extends ConsumerWidget {
             );
           });
     });
+  }
+
+  void handleSearch(WidgetRef ref, String value) {
+    ref.read(recipesDataProvider.notifier).searchRecipes(value);
+  }
+
+  List<RecipeModel> filterRecipes(List<RecipeModel> recipes, String query) {
+    if (query.isEmpty) {
+      return recipes;
+    } else {
+      return recipes
+          .where((recipe) =>
+              recipe.title.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    }
   }
 }
