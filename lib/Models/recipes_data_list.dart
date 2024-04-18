@@ -23,7 +23,7 @@ class RecipeData {
           "Flip and cook until golden brown on both sides.",
           "Serve hot with maple syrup or toppings of your choice ",
         ],
-        imageUrl: 'Assets/Images/pancake3.png'),
+        imageUrl: 'assets/images/pancake1.png'),
     //recipe 2
     RecipeModel(
         id: '2',
@@ -43,7 +43,7 @@ class RecipeData {
           "Pour in the egg mixture and cook , stirring occasionally , until desired consistency is reached.",
           "Serve hot",
         ],
-        imageUrl: 'Assets/Images/scrambledeggs.png'),
+        imageUrl: 'assets/images/scrambled_eggs.png'),
     // recipe 3
     RecipeModel(
         id: '3',
@@ -64,7 +64,7 @@ class RecipeData {
           "Sprinkle with red pepper flakes if desired.",
           "Serve immediately.",
         ],
-        imageUrl: 'Assets/Images/AvocadoToast.png'),
+        imageUrl: 'assets/images/avocadoToast.png'),
     // recipe 4
     RecipeModel(
         id: '4',
@@ -85,7 +85,7 @@ class RecipeData {
           'Fry the soaked bread slices until golden brown on both sides.',
           'Serve hot with maple syrup or toppings of your choice.',
         ],
-        imageUrl: 'Assets/Images/frenchToast2.png'),
+        imageUrl: 'assets/images/frenchToast.png'),
     // recipe 5
     RecipeModel(
         id: '5',
@@ -109,7 +109,7 @@ class RecipeData {
           'Bake for 50-60 minutes, or until a toothpick inserted into the center comes out clean.',
           'Allow to cool before slicing.',
         ],
-        imageUrl: 'Assets/Images/bananaBread.png'),
+        imageUrl: 'assets/images/bananaBread.png'),
     // recipe 6
     RecipeModel(
         id: "6",
@@ -134,7 +134,7 @@ class RecipeData {
           'Cook for a few more minutes until the omelette is cooked through.',
           'Serve hot.',
         ],
-        imageUrl: 'Assets/Images/omellete.png'),
+        imageUrl: 'assets/images/omellete.png'),
     // Recipe 7
     RecipeModel(
         id: '7',
@@ -156,7 +156,7 @@ class RecipeData {
           "Garnish with fresh mint leaves.",
           "Serve immediately or chill in the refrigerator until ready to serve.",
         ],
-        imageUrl: 'Assets/Images/fruitSalad.png'),
+        imageUrl: 'assets/images/fruitSalad.png'),
     // recipe 8
     RecipeModel(
         id: '8',
@@ -179,7 +179,7 @@ class RecipeData {
           'Top with granola, sliced fruit, and chia seeds.',
           'Serve immediately and enjoy!',
         ],
-        imageUrl: 'Assets/Images/smothie1.png'),
+        imageUrl: 'assets/images/smothieBowl.png'),
     // recipe 9
     RecipeModel(
         id: '9',
@@ -209,7 +209,7 @@ class RecipeData {
           'Fold the sides of the tortillas over the filling and roll up tightly.',
           'Serve immediately, or wrap in foil for a portable breakfast. Enjoy your breakfast burritos!',
         ],
-        imageUrl: 'Assets/Images/smothie1.png'),
+        imageUrl: 'assets/images/BreakfastBurrito.png'),
 
     // recipes for lunch
     // recipe 10
@@ -233,7 +233,7 @@ class RecipeData {
           'Toss until well combined.',
           'Serve immediately.',
         ],
-        imageUrl: "Assets/Images/smothie1.png"),
+        imageUrl: "assets/images/chickenCaesarSalad.png"),
     // recipe 11
     RecipeModel(
         id: "11",
@@ -256,7 +256,7 @@ class RecipeData {
           'Grill the sandwich until the bread is toasted and the cheese is melted.',
           'Slice and serve hot.',
         ],
-        imageUrl: "Assets/Images/smothie1.png"),
+        imageUrl: "assets/images/capresesandwich.png"),
     // recipe 12
     RecipeModel(
         id: "12",
@@ -286,7 +286,7 @@ class RecipeData {
           'Garnish with chopped green onions and sesame seeds.',
           'Serve hot and enjoy!',
         ],
-        imageUrl: "Assets/Images/smothie1.png"),
+        imageUrl: "assets/images/vegetableStirfry.png"),
     // recipe 13
     RecipeModel(
         id: "13",
@@ -309,7 +309,7 @@ class RecipeData {
           'Drizzle the dressing over the salad and toss until well coated.',
           'Serve immediately or refrigerate until ready to serve.',
         ],
-        imageUrl: "Assets/Images/smothie1.png"),
+        imageUrl: "assets/images/greekSalad.png"),
     // recipe 14
     RecipeModel(
         id: "14",
@@ -341,6 +341,6 @@ class RecipeData {
           'Garnish with chopped fresh parsley.',
           'Serve hot and enjoy!',
         ],
-        imageUrl: "Assets/Images/smothie1.png"),
+        imageUrl: "assets/images/MushroomRisotto.png"),
   ];
 }

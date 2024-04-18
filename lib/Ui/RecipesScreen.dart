@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:recipe_app_codsoft_task3/Models/recipe_model.dart';
 import 'package:recipe_app_codsoft_task3/Providers/providers.dart';
+import 'package:recipe_app_codsoft_task3/Services/firebase_auth_service.dart';
 import 'package:recipe_app_codsoft_task3/Ui/recipe_details_screen.dart';
+import 'package:recipe_app_codsoft_task3/Widgets/common_widgets.dart';
 
 class RecipeScreen extends ConsumerWidget {
   const RecipeScreen({super.key});
@@ -42,17 +46,17 @@ class RecipeScreen extends ConsumerWidget {
                     child: const Icon(Icons.menu),
                   ),
                   // Recipe Texts
-                  const Row(
+                  Row(
                     children: [
                       Icon(
                         Icons.restaurant,
-                        color: Colors.orange,
+                        color: Colors.orange.shade700,
                         size: 20,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
-                      Text(
+                      const Text(
                         "Tasty Table",
                         style: TextStyle(
                           color: Colors.black,
@@ -61,15 +65,22 @@ class RecipeScreen extends ConsumerWidget {
                       )
                     ],
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    padding: const EdgeInsets.all(10),
-                    child: const Icon(
-                      Icons.person,
-                      color: Colors.black,
+                  GestureDetector(
+                    onTap: () {
+                      ref
+                          .read(firebaseAuthServiceProvider)
+                          .signOutUser(context);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      padding: const EdgeInsets.all(10),
+                      child: const Icon(
+                        Icons.logout_outlined,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ],
@@ -115,9 +126,9 @@ class RecipeScreen extends ConsumerWidget {
                           )),
                           IconButton(
                             onPressed: () {},
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.send,
-                              color: Colors.orange,
+                              color: Colors.orange.shade700,
                             ),
                           ),
                         ],
@@ -175,8 +186,8 @@ class RecipeScreen extends ConsumerWidget {
       return GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
           ),
           itemCount: filteredRecipes.length,
           itemBuilder: (context, index) {
@@ -192,14 +203,10 @@ class RecipeScreen extends ConsumerWidget {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width / 2,
-                    height: MediaQuery.of(context).size.height / 4,
+                    height: MediaQuery.of(context).size.height / 3.2,
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10),
-                        image: const DecorationImage(
-                          image: NetworkImage(
-                              "https://media.istockphoto.com/id/1330604424/photo/macro-closeup-side-view-of-stack-of-buttermilk-pancakes-on-plate-as-traditional-breakfast.jpg?s=2048x2048&w=is&k=20&c=60_mMZxuN7zpTlKE1s_nT8badwX-ZL_M6lr0sNG1W2E="),
-                        ),
                         boxShadow: const [
                           BoxShadow(
                               color: Colors.grey,
@@ -208,8 +215,31 @@ class RecipeScreen extends ConsumerWidget {
                         ]),
                   ),
                   Positioned(
-                    top: 0,
+                      top: 0,
+                      right: 0,
+                      left: 0,
+                      child: Container(
+                        height: 130,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10)),
+                            image: DecorationImage(
+                                image: AssetImage(recipes.imageUrl),
+                                fit: BoxFit.cover),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 4,
+                                  offset: Offset(0, 3))
+                            ]),
+                      )),
+                  Positioned(
+                    bottom: 0,
                     left: 0,
+                    right: 0,
                     child: Container(
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(5),
@@ -224,18 +254,18 @@ class RecipeScreen extends ConsumerWidget {
                     ),
                   ),
                   Positioned(
-                    bottom: 0,
+                    top: 0,
                     right: 0,
                     child: Container(
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade700.withOpacity(0.9),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Text(
                         recipes.category,
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.black),
                       ),
                     ),
                   ),
